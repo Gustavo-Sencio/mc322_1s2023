@@ -55,4 +55,24 @@ public class Cliente{
         this.endereco = endereco;
     }
 
+    public boolean validarCPF(){
+        this.CPF = this.CPF.replaceAll("[^0-9]+", ""); //Tirando os caracteres não numéricos
+        if (this.CPF.length() != 11) //Verificando se o CPF possuio 11 caracteres
+            return false;
+
+        //Verificando se todos os caracteres são iguais
+        char ant = this.CPF[0];
+        boolean verificador = true; //Se o verificador permanecer true apos o for é porque todos os caracteres são iguais
+        for (int i = 1; i != 11; i++){
+            if (ant != this.CPF[i])
+                verificador = false;
+                break;
+            ant = this.CPF[i];
+        }
+
+        if (verificador)
+            return false;
+
+        //Conferir cpf
+    }
 }

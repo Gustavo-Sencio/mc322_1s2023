@@ -2,15 +2,16 @@ public class Sinistro{
     private String data;
     private String endereco;
     private int id;
-    private static int id_atual = 1;
+    private static int id_atual = 0;
 
     //Construtor
     public Sinistro(String data, String endereco){
         this.data = data;
         this.endereco = endereco;
         this.id = id_atual;
+
+        //Somando o id para nunca existirem dois id's iguais
         id_atual++;
-        
     }
 
     //Getters e setters
