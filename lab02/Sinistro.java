@@ -2,13 +2,15 @@ public class Sinistro{
     private String data;
     private String endereco;
     private int id;
+    private static int id_atual = 1;
 
     //Construtor
     public Sinistro(String data, String endereco){
         this.data = data;
         this.endereco = endereco;
-
-        //gerar id
+        this.id = id_atual;
+        id_atual++;
+        
     }
 
     //Getters e setters
