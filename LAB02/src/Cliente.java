@@ -8,7 +8,7 @@ public class Cliente{
     //Construtor
     public Cliente(String nome, String CPF, String dataNascimento, int idade, String endereco){
         this.nome = nome;
-        this.CPF = CPF;
+        this.CPF = CPF.replaceAll("[^0-9]+", "");
         this.dataNascimento = dataNascimento;
         this.idade = idade;
         this.endereco = endereco;
