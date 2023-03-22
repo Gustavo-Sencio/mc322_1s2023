@@ -12,7 +12,7 @@ public class Main{
         //Testando seguradora
         Seguradora sg = new Seguradora("SLA", "(11) 4002-8922", "SLA.seguradoranaosegura@seguro.com", "Jardim petropolis"); //Telefone do bom dia e compania
         System.out.println("O telefone da seguradora é: " + sg.getTelefone());
-        sg.setTelefone("(19 982057458)");
+        sg.setTelefone("(19) 982057458");
         System.out.println("O novo telefone da seguradora é: " + sg.getTelefone());
 
         //Testando sinistro
