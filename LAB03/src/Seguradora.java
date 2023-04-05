@@ -1,20 +1,27 @@
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 public class Seguradora {
     private String nome;
     private String telefone;
     private String email;
     private String endereco;
-    private List<Sinistro> listaSinistros = new ArrayList<Sinistro>();
-    private List<Cliente> listaClientes = new ArrayList<Cliente>();
+    private List<Sinistro> listaSinistros;
+    private List<Cliente> listaClientes;
 
-    // Construtor
-    public Seguradora(String nome, String telefone, String email, String endereco){
+    // Construtores
+    public Seguradora(){
+        this.listaClientes = new ArrayList<Cliente>();
+        this.listaSinistros = new ArrayList<Sinistro>();
+    }
+
+    public Seguradora(String nome, String telefone, String email, String endereco, 
+                        List<Sinistro> listaSinistros, List<Cliente> listaClientes){
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
         this.endereco = endereco;
+        this.listaSinistros = listaSinistros;
+        this.listaClientes = listaClientes;
     }
 
     // Getters e setters
@@ -48,6 +55,22 @@ public class Seguradora {
 
     public void setEndereco(String endereco){
         this.endereco = endereco;
+    }
+
+    public List<Sinistro> getListaSinistros(){
+        return this.listaSinistros;
+    }
+
+    public void setListaSinistros(List<Sinistro> listaSinistros){
+        this.listaSinistros = listaSinistros;
+    }
+
+    public List<Cliente> getListaClientes(){
+        return this.listaClientes;
+    }
+
+    public void setListaClientes(List<Cliente> listaClientes){
+        this.listaClientes = listaClientes;
     }
 
     //Outros métodos

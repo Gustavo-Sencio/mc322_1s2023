@@ -7,11 +7,24 @@ public class Sinistro{
     Veiculo veiculo;
     Cliente cliente;
 
-    //Construtor
-    public Sinistro(String data, String endereco){
+    //Construtores
+    public Sinistro(){
+        this.seguradora = new Seguradora();
+        this.veiculo = new Veiculo();
+        this.cliente = new Cliente();
+        this.id = id_atual;
+
+        //Somando o id para nunca existirem dois id's iguais
+        id_atual++;
+    }
+
+    public Sinistro(String data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente){
         this.data = data;
         this.endereco = endereco;
         this.id = id_atual;
+        this.seguradora = seguradora;
+        this.veiculo = veiculo;
+        this.cliente = cliente;
 
         //Somando o id para nunca existirem dois id's iguais
         id_atual++;
@@ -41,5 +54,24 @@ public class Sinistro{
     public void setVeiculo(Veiculo veiculo){
         this.veiculo = veiculo;
     }
+
+    public Veiculo getVeiculo(){
+        return this.veiculo;
+    }
     
+    public void setSeguradora(Seguradora seguradora){
+        this.seguradora = seguradora;
+    }
+
+    public Seguradora getSeguradora(){
+        return this.seguradora;
+    }
+
+    public void setCliente(Cliente cliente){
+        this.cliente = cliente;
+    }
+
+    public Cliente getCliente(){
+        return this.cliente;
+    }
 }
