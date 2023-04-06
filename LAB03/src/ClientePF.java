@@ -65,7 +65,7 @@ public class ClientePF extends Cliente{
     //Outros métodos
     public static boolean validarCPF(String CPF){
         CPF = CPF.replaceAll("[^0-9]+", ""); //Tirando os caracteres não numéricos
-        if (CPF.length() != 11) //Verificando se o CPF possuio 11 caracteres
+        if (CPF.length() != 11) //Verificando se o CPF possui 11 caracteres
             return false;
 
         //Verificando se todos os caracteres são iguais
@@ -124,7 +124,17 @@ public class ClientePF extends Cliente{
 
     @Override
     public String toString(){
-    
+        String out = "";
+        out += "Nome: "+getNome()+
+        "\nEndereco: "+getEndereco()+
+        "\nData da licenca: "+getDataLicenca()+
+        "\nCPF: "+getCPF()+
+        "\nData Nascimento: "+getDataNascimento()+
+        "\nEducacao: "+getEducacao()+
+        "\nGenero: "+getGenero()+
+        "\nClasse Economica: "+getClasseEconomica()+
+        "\nVeiculos: "+Arrays.toString(getListaVeiculos()); //O que está errado?
+        return out;
     }
 }
 

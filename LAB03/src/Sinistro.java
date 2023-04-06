@@ -8,15 +8,16 @@ public class Sinistro{
     Cliente cliente;
 
     //Construtores
-    public Sinistro(){
+    public Sinistro(Cliente cliente, Veiculo veiculo){
         this.seguradora = new Seguradora();
-        this.veiculo = new Veiculo();
-        this.cliente = new Cliente();
+        this.veiculo = veiculo;
+        this.cliente = cliente;
         this.id = id_atual;
 
         //Somando o id para nunca existirem dois id's iguais
         id_atual++;
     }
+
 
     public Sinistro(String data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente){
         this.data = data;
@@ -73,5 +74,15 @@ public class Sinistro{
 
     public Cliente getCliente(){
         return this.cliente;
+    }
+    
+    public String toString(){
+        String out = "";
+        out += "Data: "+getData()+
+        "\nEndereco: "+getEndereco()+
+        "\nSeguradora: "+seguradora.toString()+
+        "\nVeiculo: "+veiculo.toString()+
+        "\nCliente: "+cliente.toString();
+        return out;
     }
 }

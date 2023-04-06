@@ -51,6 +51,11 @@ public class Veiculo{
 
     //outros métodos
     public String toString(){
-        
+        String out = "";
+        out += "Placa: "+getPlaca()+
+        "\nMarca: "+getMarca()+
+        "\nModelo: "+getModelo()+
+        "\nAno de fabricacão: "+getAnoFabricacao();
+        return out;
     }
 }

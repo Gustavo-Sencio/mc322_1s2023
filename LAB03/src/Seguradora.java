@@ -74,28 +74,88 @@ public class Seguradora {
     }
 
     //Outros métodos
+    /*Verifica se o cliente já está cadastrado, caso não
+    esteja é feito o cadastro*/
     public boolean cadastrarCliente(Cliente cliente){
-        
+        out = true;
+
+        for (Cliente c:listaClientes){
+            if(c.equals(cliente)){
+                out = false;
+                break;
+            }
+        }
+
+        if (out)
+            listaClientes.add(cliente);
+
+        return out
     }
 
+    /*Verifica o cliente existe para remove-lo*/
     public boolean removerCliente(String cliente){
+        out = false;
 
+        for (int i = 0; i<listaClientes.size(); i++){
+            if(listaClientes.get(i).equals(cliente)){ //Se o cliente está na lista
+                out = true;
+                listaClientes.remove(i); //Remova ele
+                break;
+            }
+        }
+
+        return out;
     }
 
+    /*Separa os clientes por tipo de acordo com a entrada e retorna
+    uma lista de clientes do tipo correspondente*/
     public List<Cliente> listarClientes(String tipoCliente){
+        String pj = new String("PJ");
+        List<Cliente> outlist = new ArrayList<Cliente>();
 
+        if (tipoCliente.equals(pj)){
+            for (Cliente c:listaClientes){
+                if (c instanceof ClientePJ) //Se c é um cliente PJ
+                    outlist.add(c); //Adiciona na lista de saída
+            }
+        } else {
+            for (Cliente c:listaClientes){
+                if (c instanceof ClientePF) //Se c é um cliente PF
+                    outlist.add(c); //Adiciona na lista de saída
+            }
+        }
+
+        return outlist;
     }
 
-    public boolean gerarSinistro(){
+    /*Verifica se o sinístro já não existe, caso não exista
+    cria um novo sinístro*/
+    public boolean gerarSinistro(Cliente cliente, Veiculo veiculo){
+        out = true;
 
+        for (Sinistro s:listaSinistos){
+            if(s.veiculo.equals(veiculo) || s.cliente.equals(cliente)){
+                out = false;
+                break;
+            }
+        }
+
+        if (out){
+            novo_s = new Sinistro(cliente, veiculo);
+            listaSinistos.add(novo_s);
+        }
+
+        return out;
     }
 
+    /*Retorna true caso tenha conseguido ??? oq fazer aqui??*/
     public boolean visualizarSinistro(String cliente){
-
+        return true;
     }
 
-    public List<Sinistro> listarSinistos(){
-        
+
+    public List<Sinistro> listarSinistros(){
+        return listaSinistros; //???
     }
 
 }
