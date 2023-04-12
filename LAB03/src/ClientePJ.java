@@ -96,7 +96,7 @@ public class ClientePJ extends Cliente{
             d14 = (char)((11-resto) + 48);
             
         //Verificando se os digitos do CPF conferem com os digitos calculados
-        if((d13 == CPF.charAt(12)) && (d14 == CPF.charAt(13)))
+        if((d13 == CNPJ.charAt(12)) && (d14 == CNPJ.charAt(13)))
             return true;
         else 
             return false;
@@ -110,7 +110,7 @@ public class ClientePJ extends Cliente{
         "\nData da licenca: "+getDataLicenca()+
         "\nData fundacao: "+getDataFundacao()+
         "\nCNPJ: "+getCNPJ()+
-        "\nVeiculos: "+Arrays.toString(getListaVeiculos()); //O que está errado?
+        "\nVeiculos: "+getListaVeiculos().toString(); //O que está errado?
         return out;
     }
 }

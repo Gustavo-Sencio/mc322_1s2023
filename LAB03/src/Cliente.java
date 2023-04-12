@@ -60,7 +60,7 @@ public class Cliente{
         out += "NOME: "+getNome()+
         "\nENDERECO: "+getEndereco()+
         "\nData da licenca: "+getDataLicenca()+
-        "\nVeiculos: "+Arrays.toString(getListaVeiculos()); //O que está errado?
+        "\nVeiculos: "+getListaVeiculos().toString(); //O que está errado?
         return out;
     }
 }

@@ -77,7 +77,7 @@ public class Seguradora {
     /*Verifica se o cliente já está cadastrado, caso não
     esteja é feito o cadastro*/
     public boolean cadastrarCliente(Cliente cliente){
-        out = true;
+        boolean out = true;
 
         for (Cliente c:listaClientes){
             if(c.equals(cliente)){
@@ -89,21 +89,21 @@ public class Seguradora {
         if (out)
             listaClientes.add(cliente);
 
-        return out
+        return out;
     }
 
     /*Verifica o cliente existe para remove-lo*/
     public boolean removerCliente(String cliente){
-        out = false;
+        boolean out = false;
 
         for (int i = 0; i<listaClientes.size(); i++){
-            if(listaClientes.get(i).equals(cliente)){ //Se o cliente está na lista
+            if(listaClientes.get(i).getNome().equals(cliente)){ //Se o cliente está na lista
                 out = true;
                 listaClientes.remove(i); //Remova ele
                 break;
             }
         }
-
+        ClientePF
         return out;
     }
 
@@ -131,9 +131,9 @@ public class Seguradora {
     /*Verifica se o sinístro já não existe, caso não exista
     cria um novo sinístro*/
     public boolean gerarSinistro(Cliente cliente, Veiculo veiculo){
-        out = true;
+        boolean out = true;
 
-        for (Sinistro s:listaSinistos){
+        for (Sinistro s:getListaSinistros()){
             if(s.veiculo.equals(veiculo) || s.cliente.equals(cliente)){
                 out = false;
                 break;
@@ -141,21 +141,29 @@ public class Seguradora {
         }
 
         if (out){
-            novo_s = new Sinistro(cliente, veiculo);
-            listaSinistos.add(novo_s);
+            Sinistro novo_s = new Sinistro(cliente, veiculo);
+            getListaSinistros().add(novo_s);
         }
 
         return out;
     }
 
-    /*Retorna true caso tenha conseguido ??? oq fazer aqui??*/
+    /*Retorna true caso tenha conseguido imprimir o sinistro*/
     public boolean visualizarSinistro(String cliente){
-        return true;
+        boolean out = false;
+
+        for (int i = 0; i<listaSinistros.size(); i++){
+            if(listaSinistros.get(i).getCliente().getNome().equals(cliente)){ //Se o cliente está na lista
+                out = true;
+                System.out.println(listaSinistros.get(i).toString());
+            }
+        }
+        return out;
     }
 
 
     public List<Sinistro> listarSinistros(){
-        return listaSinistros; //???
+        return listaSinistros; 
     }
 
 }
