@@ -6,6 +6,7 @@ public class ClientePF extends Cliente{
     private String educacao;
     private String genero;
     private String classeEconomica;
+    private Date dataLicenca;
 
     //Construtores
     public ClientePF(String CPF){
@@ -17,9 +18,10 @@ public class ClientePF extends Cliente{
                         String educacao, String genero, String classeEconomica,
                         List<Veiculo> listaVeiculos, String cpf, Date dataNascimento){
         //Construtor da superclasse
-        super(nome, endereco, dataLicenca, listaVeiculos);
+        super(nome, endereco, listaVeiculos);
         this.CPF = cpf.replaceAll("[^0-9]+", "");
         this.dataNascimento = dataNascimento;
+        this.dataLicenca = dataLicenca;
         this.educacao = educacao;
         this.genero = genero;
         this.classeEconomica = classeEconomica;
@@ -36,6 +38,14 @@ public class ClientePF extends Cliente{
 
     public void setDataNascimento(Date dataNascimento){
         this.dataNascimento = dataNascimento;
+    }
+
+    public Date getDataLicenca(){
+        return this.dataLicenca;
+    }
+
+    public void setDataLicenca(Date dataLicenca){
+        this.dataLicenca = dataLicenca;
     }
 
     public String getEducacao(){

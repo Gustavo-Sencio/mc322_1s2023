@@ -10,10 +10,10 @@ public class ClientePJ extends Cliente{
         this.CNPJ = CNPJ;
     }
 
-    public ClientePJ(String nome, String endereco, Date dataLicenca, 
-                        List<Veiculo> listaVeiculos, String CNPJ, Date dataFundacao){
+    public ClientePJ(String nome, String endereco,
+                     List<Veiculo> listaVeiculos, String CNPJ, Date dataFundacao){
         //Construtor da superclasse
-        super(nome, endereco, dataLicenca, listaVeiculos);
+        super(nome, endereco, listaVeiculos);
         this.CNPJ = CNPJ.replaceAll("[^0-9]+", "");
         this.dataFundacao = dataFundacao;
     }
@@ -107,7 +107,6 @@ public class ClientePJ extends Cliente{
         String out = "";
         out += "Nome: "+getNome()+
         "\nEndereco: "+getEndereco()+
-        "\nData da licenca: "+getDataLicenca()+
         "\nData fundacao: "+getDataFundacao()+
         "\nCNPJ: "+getCNPJ()+
         "\nVeiculos: "+getListaVeiculos().toString(); //O que está errado?
