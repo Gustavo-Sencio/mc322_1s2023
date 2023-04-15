@@ -4,10 +4,7 @@ public class Veiculo{
     private String modelo;
     private int anoFabricacao;
 
-    // Construtores
-    public Veiculo(){
-        
-    }
+    // Construtor
 
     public Veiculo(String placa, String marca, String modelo, int anoFabricacao){
         this.placa = placa;
