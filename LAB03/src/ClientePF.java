@@ -143,7 +143,7 @@ public class ClientePF extends Cliente{
         "\nEducacao: "+getEducacao()+
         "\nGenero: "+getGenero()+
         "\nClasse Economica: "+getClasseEconomica()+
-        "\nVeiculos: "+getListaVeiculos().toString(); //O que está errado?
+        "\nVeiculos: "+getListaVeiculos().toString();
         return out;
     }
 }

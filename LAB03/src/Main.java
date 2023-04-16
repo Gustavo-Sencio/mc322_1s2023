@@ -39,7 +39,7 @@ public class Main{
     }
 
     public static void removerClientePF(Seguradora seg, ClientePF cl_pf){
-        boolean verificador = seg.cadastrarCliente(cl_pf);
+        boolean verificador = seg.removerCliente(cl_pf.getNome());
         if (verificador){
             System.out.println("O cliente "+cl_pf.getNome()+" foi removido!");
         }else{
@@ -51,45 +51,78 @@ public class Main{
         boolean verificador = seg.gerarSinistro(cliente, veiculo);
 
         if (verificador){
-            System.out.println("O sinistro já existe!")
+            System.out.println("O sinistro foi cadastrado com sucesso!");
         }else{
-            System.out.println("O sinistro foi cadastrado com sucesso!")
+            System.out.println("O sinistro já existe!");
         }
     }
 
     public static void menu(Seguradora seg){
         Scanner entrada = new Scanner(System.in);
         boolean loop = true;
+        int input;
+        int cl;
+        List<Cliente> listaClientes;
+        List<Sinistro> listaSinistros;
+        boolean verificador;
+        String str;
 
         while(loop){
-            System.out.println("Selecione alguma das seguinte opcoes:\n
-            1 - Listar clientes\n
-            2 - Visualizar sinistro\n
-            3 - Listar Sinistros\n
-            0 - Encerrar menu")
+            System.out.println("Selecione alguma das seguinte opcoes:\n"+
+            "1 - Listar clientes\n"+
+            "2 - Visualizar sinistro\n"+
+            "3 - Listar Sinistros\n"+
+            "0 - Encerrar menu");
 
-            int input = entrada.nextInt();
+            input = entrada.nextInt();
 
             switch (input) {
                 case 1:
-                    
-                    break;
-                case 2:
+                    System.out.println("Qual tipo de cliente você quer listar?\n" + 
+                                       "1 - PF\n2 - PJ");
+                    cl = entrada.nextInt();
 
+                    switch (cl) {
+                        case 1:
+                            listaClientes = seg.listarClientes("PF");
+                            System.out.println(listaClientes.toString());
+                            break;
+                        
+                        case 2:
+                            listaClientes = seg.listarClientes("PJ");
+                            System.out.println(listaClientes.toString());
+                            break;
+                        
+                        default:
+                            System.out.println("O valor digitado não está correto.");
+                            break;
+                    }
+                    break;
+                
+                case 2:
+                    System.out.println("Qual é o nome do cliente?");
+                    str = entrada.nextLine();
+                    verificador = seg.visualizarSinistro(str);
+                    if (!verificador){
+                        System.out.println("O cliente não possui nenhum sinistro!");
+                    }
                     break;
 
                 case 3:
-                
+                    listaSinistros = seg.listarSinistros();
+                    System.out.println(listaSinistros.toString());
                     break;
                 
                 case 0:
                     System.out.println("Encerrando o menu.");
                     loop = false;
                     break;
+
                 default:
                     System.out.println("O numero digitado é invalido, por favor escolha uma opcao corretamente");
                     break;
             }
+            System.out.println("-------------------------------------");
         }
     } 
 
@@ -126,10 +159,12 @@ public class Main{
         Main.verificarCPF(verificador1, pf1);
         Main.verificarCPF(verificador3, pf2);
 
+        System.out.println("-------------------------------------");
+
         //Adicionando um veiculo em cada cliente
-        v_pf1 = new Veiculo("QYW4R26", "Fiat", "UNO", 2004);
-        v_pf2 = new Veiculo("ZKA15HP", "Honda", "Civic", 2013);
-        v_pj = new Veiculo("CXZ4T19", "Nissan", "Kicks", 2007);
+        Veiculo v_pf1 = new Veiculo("QYW4R26", "Fiat", "UNO", 2004);
+        Veiculo v_pf2 = new Veiculo("ZKA15HP", "Honda", "Civic", 2013);
+        Veiculo v_pj = new Veiculo("CXZ4T19", "Nissan", "Kicks", 2007);
         pf1.getListaVeiculos().add(v_pf1);
         pf2.getListaVeiculos().add(v_pf2);
         pj.getListaVeiculos().add(v_pj);
@@ -137,25 +172,32 @@ public class Main{
         //Criando uma seguradora
         List<Sinistro> listaSinistros = new ArrayList<Sinistro>();
         List<Cliente> listaClientes = new ArrayList<Cliente>();
-        Seguradora seg = new Seguradora("Direcao responsavel", "(19)98702-2149", "Direcaoresp@gmail.com",
-                                        "Jardim Capivari", listaSinistros, listaClientes);
-        
+        Seguradora seg = new Seguradora("Direcao responsavel", "(19)98702-2149",    "Direcaoresp@gmail.com", "Jardim Capivari", listaSinistros, listaClientes);
+
         //Cadastrando os clientes na seguradora
         Main.cadastrarClientePF(seg, pf1);
         Main.cadastrarClientePF(seg, pf2);
-        Main.cadastrarCliente(seg, pj);
+        Main.cadastrarClientePJ(seg, pj);
+
+        System.out.println("-------------------------------------");
 
         //Removendo um cliente
         Main.removerClientePF(seg, pf2);
 
+        System.out.println("-------------------------------------");
+
         //Gerando um sinistro
         Main.gerandoSinistro(seg, pf1, v_pf1);
 
+        System.out.println("-------------------------------------");
+
         //chamando o toString
-        System.out.println(v_pf1.toString());
-        v = seg.visualizarSinistro(pf1.getNome());
-        System.out.println(pf1.toString());
+        System.out.println(v_pf1.toString()+"\n");
+        boolean v = seg.visualizarSinistro(pf1.getNome());
+        System.out.println("\n"+pf1.toString()+"\n");
         System.out.println(pj.toString());
+
+        System.out.println("-------------------------------------");
 
         //Rodando o menu de uma seguradora
         Main.menu(seg);

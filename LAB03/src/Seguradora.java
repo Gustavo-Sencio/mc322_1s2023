@@ -96,10 +96,10 @@ public class Seguradora {
     public boolean removerCliente(String cliente){
         boolean out = false;
 
-        for (int i = 0; i<listaClientes.size(); i++){
-            if(listaClientes.get(i).getNome().equals(cliente)){ //Se o cliente está na lista
+        for (int i = 0; i<this.listaClientes.size(); i++){
+            if(this.listaClientes.get(i).getNome().equals(cliente)){ //Se o cliente está na lista
                 out = true;
-                listaClientes.remove(i); //Remova ele
+                this.listaClientes.remove(i); //Remova ele
                 break;
             }
         }
@@ -133,7 +133,8 @@ public class Seguradora {
         boolean out = true;
 
         for (Sinistro s:getListaSinistros()){
-            if(s.veiculo.equals(veiculo) || s.cliente.equals(cliente)){
+            if(s.getVeiculo().equals(veiculo) || 
+               s.getCliente().equals(cliente)){
                 out = false;
                 break;
             }
@@ -151,10 +152,11 @@ public class Seguradora {
     public boolean visualizarSinistro(String cliente){
         boolean out = false;
 
-        for (int i = 0; i<listaSinistros.size(); i++){
-            if(listaSinistros.get(i).getCliente().getNome().equals(cliente)){ //Se o cliente está na lista
+        for (int i = 0; i<this.listaSinistros.size(); i++){
+            System.out.println(this.listaSinistros.get(i).getCliente().getNome());
+            if(this.listaSinistros.get(i).getCliente().getNome().equals(cliente)){ //Se o cliente está na lista
                 out = true;
-                System.out.println(listaSinistros.get(i).toString());
+                System.out.println(this.listaSinistros.get(i).toString());
             }
         }
         return out;
