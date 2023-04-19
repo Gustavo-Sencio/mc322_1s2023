@@ -153,7 +153,6 @@ public class Seguradora {
         boolean out = false;
 
         for (int i = 0; i<this.listaSinistros.size(); i++){
-            System.out.println(this.listaSinistros.get(i).getCliente().getNome());
             if(this.listaSinistros.get(i).getCliente().getNome().equals(cliente)){ //Se o cliente está na lista
                 out = true;
                 System.out.println(this.listaSinistros.get(i).toString());

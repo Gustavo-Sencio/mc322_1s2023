@@ -101,6 +101,7 @@ public class Main{
                 
                 case 2:
                     System.out.println("Qual é o nome do cliente?");
+                    entrada.nextLine();
                     str = entrada.nextLine();
                     verificador = seg.visualizarSinistro(str);
                     if (!verificador){
