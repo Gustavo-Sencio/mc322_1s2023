@@ -161,8 +161,21 @@ public class Seguradora {
         return out;
     }
 
-
     public List<Sinistro> listarSinistros(){
         return listaSinistros; 
     }
+
+    public double calcularPrecoSeguroCliente(Cliente cliente){
+        return 0.0;
+    }
+
+    public void calcularReceita(){
+        double soma = 0.0;
+        for (Cliente c:this.listaClientes){
+            soma += c.getValorSeguro();
+        }
+
+        System.out.println("A receita da seguradora "+this.nome+" é: "+soma);
+    }
+
 }
