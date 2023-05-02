@@ -2,7 +2,7 @@ import java.util.*;
 
 public class ClientePJ extends Cliente{
     private final String CNPJ;
-    private Date dataFundacao;
+    private Calendar dataFundacao;
     private int qtdFuncionarios;
 
     //Construtores
@@ -11,8 +11,8 @@ public class ClientePJ extends Cliente{
         this.CNPJ = CNPJ;
     }
 
-    public ClientePJ(String nome, String endereco,
-                     List<Veiculo> listaVeiculos, String CNPJ, Date dataFundacao, int qtdFuncionarios){
+    public ClientePJ(String nome, String endereco, List<Veiculo> listaVeiculos, 
+                    String CNPJ, Calendar dataFundacao, int qtdFuncionarios){
         //Construtor da superclasse
         super(nome, endereco, listaVeiculos);
         this.CNPJ = CNPJ.replaceAll("[^0-9]+", "");
@@ -25,11 +25,11 @@ public class ClientePJ extends Cliente{
         return this.CNPJ;
     }
 
-    public Date getDataFundacao(){
+    public Calendar getDataFundacao(){
         return this.dataFundacao;
     }
 
-    public void setDataFundacao(Date dataFundacao){
+    public void setDataFundacao(Calendar dataFundacao){
         this.dataFundacao = dataFundacao;
     }
 
@@ -56,6 +56,7 @@ public class ClientePJ extends Cliente{
 
     @Override
     public double calculaScore(){
-        return 0.0;
+        double out = calcSeguro.VALOR_BASE.valor() * (1 + ((this.qtdFuncionarios/100) * this.listaVeiculos.size()));
+        return out;
     }
 }

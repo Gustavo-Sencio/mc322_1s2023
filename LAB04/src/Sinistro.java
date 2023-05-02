@@ -1,5 +1,7 @@
+import java.util.Calendar;
+
 public class Sinistro{
-    private String data;
+    private Calendar data;
     private String endereco;
     private final int id;
     private static int id_atual = 0;
@@ -19,7 +21,7 @@ public class Sinistro{
     }
 
 
-    public Sinistro(String data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente){
+    public Sinistro(Calendar data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente){
         this.data = data;
         this.endereco = endereco;
         this.id = id_atual;
@@ -32,11 +34,11 @@ public class Sinistro{
     }
 
     //Getters e setters
-    public String getData(){
+    public Calendar getData(){
         return this.data;
     }
 
-    public void setData(String data){
+    public void setData(Calendar data){
         this.data = data;
     }
 

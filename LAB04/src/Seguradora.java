@@ -88,7 +88,8 @@ public class Seguradora {
 
         if (out)
             listaClientes.add(cliente);
-
+            cliente.setValorSeguro(calcularPrecoSeguroCliente(cliente));
+        
         return out;
     }
 
@@ -143,6 +144,7 @@ public class Seguradora {
         if (out){
             Sinistro novo_s = new Sinistro(cliente, veiculo);
             getListaSinistros().add(novo_s);
+            cliente.setValorSeguro(calcularPrecoSeguroCliente(cliente));
         }
 
         return out;
@@ -161,12 +163,19 @@ public class Seguradora {
         return out;
     }
 
-    public List<Sinistro> listarSinistros(){
-        return listaSinistros; 
+    public List<Sinistro> listarSinistros(Cliente cliente){
+        List<Sinistro> sinistrosCliente = new ArrayList<Sinistro>();
+
+        for (int i = 0; i<this.listaSinistros.size(); i++){
+            if(this.listaSinistros.get(i).getCliente().equals(cliente))
+                sinistrosCliente.add(this.listaSinistros.get(i));
+        }
+        return sinistrosCliente;
     }
 
     public double calcularPrecoSeguroCliente(Cliente cliente){
-        return 0.0;
+        double out = cliente.calculaScore() * (1 + listarSinistros(cliente).size());
+        return out;
     }
 
     public void calcularReceita(){

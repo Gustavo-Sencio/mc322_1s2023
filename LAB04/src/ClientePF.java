@@ -2,11 +2,11 @@ import java.util.*;
 
 public class ClientePF extends Cliente{
     private final String CPF;
-    private Date dataNascimento;
+    private Calendar dataNascimento;
     private String educacao;
     private String genero;
     private String classeEconomica;
-    private Date dataLicenca;
+    private Calendar dataLicenca;
 
     //Construtores
     public ClientePF(String CPF){
@@ -14,9 +14,9 @@ public class ClientePF extends Cliente{
         this.CPF = CPF.replaceAll("[^0-9]+", "");
     }
 
-    public ClientePF(String nome, String endereco, Date dataLicenca,
+    public ClientePF(String nome, String endereco, Calendar dataLicenca,
                         String educacao, String genero, String classeEconomica,
-                        List<Veiculo> listaVeiculos, String cpf, Date dataNascimento){
+                        List<Veiculo> listaVeiculos, String cpf, Calendar dataNascimento){
         //Construtor da superclasse
         super(nome, endereco, listaVeiculos);
         this.CPF = cpf.replaceAll("[^0-9]+", "");
@@ -32,19 +32,19 @@ public class ClientePF extends Cliente{
         return this.CPF;
     }
 
-    public Date getDataNascimento(){
+    public Calendar getDataNascimento(){
         return this.dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento){
+    public void setDataNascimento(Calendar dataNascimento){
         this.dataNascimento = dataNascimento;
     }
 
-    public Date getDataLicenca(){
+    public Calendar getDataLicenca(){
         return this.dataLicenca;
     }
 
-    public void setDataLicenca(Date dataLicenca){
+    public void setDataLicenca(Calendar dataLicenca){
         this.dataLicenca = dataLicenca;
     }
 
@@ -91,9 +91,21 @@ public class ClientePF extends Cliente{
     
     @Override
     public double calculaScore(){
-        double out = calcSeguro.VALOR_BASE.valor();
+        int ano_nascimento = this.dataNascimento.get(Calendar.YEAR);
+        int idade = 2023 - ano_nascimento;
+        double fator_idade;
+
+        if ((idade >= 18) && (idade <= 30))
+            fator_idade = calcSeguro.FATOR_18_30.valor();
+        else if ((idade > 30) && (idade <= 60))
+            fator_idade = calcSeguro.FATOR_30_60.valor();
+        else if ((idade > 60) && (idade <= 90))
+            fator_idade = calcSeguro.FATOR_60_90.valor();
+        else //Caso o cliente não esteja nas faixas etarias destacadas
+            fator_idade = 1.0; //o fator_idade nao deve alterar a conta
         
-        return 0.0;
+        double out = calcSeguro.VALOR_BASE.valor() * fator_idade * this.listaVeiculos.size();
+        return out;
     }
 }
 
