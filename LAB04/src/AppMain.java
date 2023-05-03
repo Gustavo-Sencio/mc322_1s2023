@@ -1,6 +1,7 @@
 import java.util.*;
+import menus.*;
 
-public class Main{
+public class AppMain{
     public static void main(String [] args){
         //Cadastrando um cliente PF
         Calendar data_nascimento = Calendar.getInstance();
@@ -33,17 +34,18 @@ public class Main{
         "Direcaoresp@gmail.com", "Jardim Capivari", listaSinistros, listaClientes);
 
         //Cadastrando os clientes na seguradora
-        Main.cadastrarClientePF(seg, Rodolfo);
-        Main.cadastrarClientePJ(seg, Suprema);
+        AppMain.cadastrarClientePF(seg, Rodolfo);
+        AppMain.cadastrarClientePJ(seg, Suprema);
 
         System.out.println("-------------------------------------");
 
         //Gerando um sinistro em cada cliente
-        Main.gerandoSinistro(seg, Rodolfo, v_pf);
-        Main.gerandoSinistro(seg, Suprema, v_pj);
+        AppMain.gerandoSinistro(seg, Rodolfo, v_pf);
+        AppMain.gerandoSinistro(seg, Suprema, v_pj);
 
         System.out.println("-------------------------------------");
         
+        Listar list;
     }
 
     public static void gerandoSinistro(Seguradora seg, Cliente cliente, Veiculo veiculo){
@@ -71,6 +73,25 @@ public class Main{
             System.out.println("O cliente "+cl_pj.getNome()+" foi cadastrado!");
         }else{
             System.out.println("O cliente "+cl_pj.getNome()+" já está cadastrado!");
+        }
+    }
+
+    public static void menu(Seguradora seg){
+        Scanner entrada = new Scanner(System.in);
+        boolean loop = true;
+        int input;
+
+        while(loop){
+            System.out.println("Selecione alguma das seguinte opcoes:\n"+
+            "1 - Cadastros\n"+
+            "2 - Listar\n"+
+            "3 - Excluir\n"+
+            "4 - Gerar Sinistro\n"+
+            "5 - Transferir Seguro\n"+
+            "6 - Calcular Receita Seguradora\n"+
+            "0 - Encerrar menu");
+            
+            input = entrada.nextInt();
         }
     }
 }

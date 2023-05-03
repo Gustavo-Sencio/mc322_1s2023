@@ -174,10 +174,16 @@ public class Seguradora {
     }
 
     public double calcularPrecoSeguroCliente(Cliente cliente){
-        double out = cliente.calculaScore() * (1 + listarSinistros(cliente).size());
+        double out;
+        if (cliente instanceof ClientePF)
+            out = ((ClientePF)cliente).calculaScore() * (1 + listarSinistros(cliente).size());
+        else if (cliente instanceof ClientePJ)
+            out = ((ClientePJ)cliente).calculaScore() * (1 + listarSinistros(cliente).size());
+        else
+            out = cliente.calculaScore() * (1 + listarSinistros(cliente).size());
         return out;
     }
-
+    
     public void calcularReceita(){
         double soma = 0.0;
         for (Cliente c:this.listaClientes){
