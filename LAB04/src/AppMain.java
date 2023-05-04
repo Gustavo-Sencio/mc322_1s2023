@@ -80,18 +80,109 @@ public class AppMain{
         Scanner entrada = new Scanner(System.in);
         boolean loop = true;
         int input;
+        MenuOperacoes menu;
 
         while(loop){
             System.out.println("Selecione alguma das seguinte opcoes:\n"+
-            "1 - Cadastros\n"+
-            "2 - Listar\n"+
-            "3 - Excluir\n"+
+            "11 - Cadastrar cliente\n"+
+            "12 - Cadastrar Veiculo\n"+
+            "13 - Cadastrar Seguradora\n"+
+            "21 - Listar clientes da seguradora\n"+
+            "22 - Listar sinistros da seguradora\n"+
+            "23 - Listar sinistros do cliente\n"+
+            "24 - Listar veiculos do cliente\n"+
+            "25 - listar veiculos da seguradora\n"+
+            "31 - Excluir cliente\n"+
+            "32 - Excluir veiculo\n"+
+            "33 - Excluir sinistro\n"+
             "4 - Gerar Sinistro\n"+
             "5 - Transferir Seguro\n"+
             "6 - Calcular Receita Seguradora\n"+
             "0 - Encerrar menu");
             
             input = entrada.nextInt();
+            
+            switch (input) {
+                case 11:
+                    menu = MenuOperacoes.CADASTRAR_CLIENTE;
+                    loop = MenuOperacoes.processarEntrada(menu, seg);
+                    break;
+                
+                case 12:
+                    menu = MenuOperacoes.CADASTRAR_VEICULO;
+                    loop = MenuOperacoes.processarEntrada(menu, seg);
+                    break;
+
+                case 13:
+                    menu = MenuOperacoes.CADASTRAR_SEGURADORA;
+                    loop = MenuOperacoes.processarEntrada(menu, seg);
+                    break;
+
+                case 21:
+                    menu = MenuOperacoes.LISTAR_CLIENTE_SEG;
+                    loop = MenuOperacoes.processarEntrada(menu, seg);
+                    break;
+
+                case 22:
+                    menu = MenuOperacoes.LISTAR_SINISTROS_SEG;
+                    loop = MenuOperacoes.processarEntrada(menu, seg);
+                    break;
+
+                case 23:
+                    menu = MenuOperacoes.LISTAR_SINISTROS_CLIENTE;
+                    loop = MenuOperacoes.processarEntrada(menu, seg);
+                    break;
+
+                case 24:
+                    menu = MenuOperacoes.LISTAR_VEICULOS_CLIENTE;
+                    loop = MenuOperacoes.processarEntrada(menu, seg);
+                    break;
+
+                case 25:
+                    menu = MenuOperacoes.LISTAR_VEICULOS_SEGURADORA;
+                    loop = MenuOperacoes.processarEntrada(menu, seg);
+                    break;
+
+                case 31:
+                    menu = MenuOperacoes.EXCLUIR_CLIENTE;
+                    loop = MenuOperacoes.processarEntrada(menu, seg);
+                    break;
+
+                case 32:
+                    menu = MenuOperacoes.EXCLUIR_VEICULO;
+                    loop = MenuOperacoes.processarEntrada(menu, seg);
+                    break;
+
+                case 33:
+                    menu = MenuOperacoes.EXCLUIR_SINISTRO;
+                    loop = MenuOperacoes.processarEntrada(menu, seg);
+                    break;
+                
+                case 4:
+                    menu = MenuOperacoes.GERAR_SINISTRO;
+                    loop = MenuOperacoes.processarEntrada(menu, seg);
+                    break;
+
+                case 5:
+                    menu = MenuOperacoes.TRANSFERIR_SEGURO;
+                    loop = MenuOperacoes.processarEntrada(menu, seg);
+                    break;
+
+                case 6:
+                    menu = MenuOperacoes.CALCULAR_RECEITA_SEGURADORA;
+                    loop = MenuOperacoes.processarEntrada(menu, seg);
+                    break;
+
+                case 0:
+                    menu = MenuOperacoes.SAIR;
+                    loop = MenuOperacoes.processarEntrada(menu, seg);
+                    break;
+                
+                default:
+                    System.out.println("O valor digitado não corresponde com as opcoes");
+                    break;
+            }
+            System.out.println("-------------------------------------");
         }
     }
 }
