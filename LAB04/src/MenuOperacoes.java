@@ -35,10 +35,11 @@ public enum MenuOperacoes{
         List<Veiculo> listaVeiculos = new ArrayList<Veiculo>();
         boolean existe;
         Cliente cliente = new Cliente();
+        Veiculo veiculo = new Veiculo();
 
         switch (menu) {
             case CADASTRAR_CLIENTE:
-            entrada.nextLine();
+            //entrada.nextLine();
             System.out.println("PF ou PJ?");
             String str = entrada.nextLine();
             
@@ -98,10 +99,9 @@ public enum MenuOperacoes{
             }
                 break;
             
-            case CADASTRAR_VEICULO:
+            case CADASTRAR_VEICULO: //alterar indice
                 existe = false;
                 System.out.println("Qual cliente que o veiculo será adicionado?");
-                entrada.nextLine();
                 String cl = entrada.nextLine();
 
                 for (Cliente c:seg.getListaClientes()){
@@ -124,6 +124,7 @@ public enum MenuOperacoes{
                 } else {
                     System.out.println("O cliente não existe");
                 }
+                AppMain.atualizar_valores(seg);
                 break;
             
             case CADASTRAR_SEGURADORA:
@@ -134,7 +135,6 @@ public enum MenuOperacoes{
                 System.out.println("Imprimindo lista de clientes:");
                 for (Cliente c:seg.getListaClientes()){
                     System.out.println(c.getNome()+" - ");
-                    break;
                 }
                 break;
 
@@ -146,8 +146,8 @@ public enum MenuOperacoes{
                 break;
             
             case LISTAR_SINISTROS_CLIENTE:
+                existe = false;
                 System.out.println("Qual o nome do cliente?");
-                entrada.nextLine();
                 nome = entrada.nextLine();
 
                 for(Cliente c:seg.getListaClientes()){
@@ -157,41 +157,159 @@ public enum MenuOperacoes{
                         break;
                     }
                 }
-                List<Sinistro> listaSinistros = seg.listarSinistros(cliente);
-                for (Sinistro s:listaSinistros)
-                    System.out.println(s.toString());                
+                if (existe){
+                    List<Sinistro> listaSinistros = seg.listarSinistros(cliente);
+                    for (Sinistro s:listaSinistros)
+                        System.out.println(s.toString());
+                        System.out.println("****************"); 
+                } else {
+                    System.out.println("O cliente não existe");           
+                }
                 break;
 
             case LISTAR_VEICULOS_CLIENTE:
+                existe = false;
+                System.out.println("Qual o nome do cliente?");
+                nome = entrada.nextLine();
 
+                for(Cliente c:seg.getListaClientes()){
+                    if (c.getNome().equals(nome)){
+                        cliente = c;
+                        existe = true;
+                        break;
+                    }
+                }
+                if (existe){
+                    List<Veiculo> l_Veiculos = cliente.getListaVeiculos();
+                    for (Veiculo v:l_Veiculos)
+                        System.out.println(v.toString());
+                        System.out.println("****************");
+                } else{
+                    System.out.println("O cliente não existe");
+                }
                 break;
 
             case LISTAR_VEICULOS_SEGURADORA:
-
+                for (Cliente c:seg.getListaClientes()){
+                    for (Veiculo v:c.getListaVeiculos()){
+                        System.out.println(v.toString());
+                        System.out.println("****************");
+                    }
+                }
                 break;
             
             case EXCLUIR_CLIENTE:
-
+                System.out.println("Qual o nome do cliente?");
+                nome = entrada.nextLine();
+                boolean ok = seg.removerCliente(nome);
+                if (ok){
+                    System.out.println("O cliente foi removido com sucesso!");
+                } else {
+                    System.out.println("O cliente não existe!");
+                }
                 break;
 
             case EXCLUIR_SINISTRO:
-
+                existe = false;
+                System.out.println("Qual o id do sinistro?");
+                int n = entrada.nextInt();
+                for (int i = 0; i < seg.getListaSinistros().size(); i++){
+                    if (seg.getListaSinistros().get(i).getId() == n){
+                        existe = true;
+                        seg.getListaSinistros().remove(i);
+                        break;
+                    }
+                }
+                if (existe)
+                    System.out.println("Sinistro removido!");
+                else
+                    System.out.println("Sinistro nao existe!");
                 break;
 
-            case EXCLUIR_VEICULO:
-
+            case EXCLUIR_VEICULO: //Alterar indice
+                existe = false;
+                System.out.println("Qual a placa do veiculo?");
+                nome = entrada.nextLine();
+                for (Cliente c:seg.getListaClientes()){
+                    for (int i = 0; i < c.getListaVeiculos().size(); i++){
+                        if (c.getListaVeiculos().get(i).getPlaca().equals(nome)){
+                            existe = true;
+                            c.getListaVeiculos().remove(i);
+                            break;
+                        }
+                    }
+                }
+                if (existe)
+                    System.out.println("Veiculo removido com sucesso!");
+                else
+                    System.out.println("Veiculo não existe!");
+                AppMain.atualizar_valores(seg);
                 break;
 
             case GERAR_SINISTRO:
+                System.out.println("Qual é o cliente do sinistro?");
+                nome = entrada.nextLine();
+                System.out.println("Qual é a placa do veiculo do sinistro?");
+                String Placa = entrada.nextLine();
 
+                for (Cliente c: seg.getListaClientes()){
+                    if (c.getNome().equals(nome)){
+                        cliente = c;
+                        break;
+                    }
+                }
+
+                for (Veiculo v:cliente.getListaVeiculos()){
+                    if (v.getPlaca().equals(Placa)){
+                        veiculo = v;
+                        break;
+                    }
+                }
+
+                boolean Ok = seg.gerarSinistro(cliente, veiculo);
+                if (Ok)
+                    System.out.println("Sinistro gerado com sucesso");
+                else
+                    System.out.println("Falha ao gerar sinistro");
                 break;
 
             case TRANSFERIR_SEGURO:
+                boolean existe_nome1 = false, existe_nome2 = false;
+                int indice1 = 0, indice2 = 0;
+                System.out.println("Qual é o nome do cliente que vai transferir o seguro?");
+                String nome1 = entrada.nextLine();
+                System.out.println("Qual é o nome do cliente que vai receber os veiculos?");
+                String nome2 = entrada.nextLine();
 
+                for (int i = 0; i < seg.getListaClientes().size(); i++){
+                    if (seg.getListaClientes().get(i).getNome().equals(nome1)){
+                        indice1 = i;
+                        existe_nome1 = true;
+                    }
+                    if (seg.getListaClientes().get(i).getNome().equals(nome2)){
+                        indice2 = i;
+                        existe_nome2 = true;
+                    }
+                }
+
+                if (existe_nome1 && existe_nome2){
+                    List<Veiculo> listaVeiculos1 = seg.getListaClientes().get(indice1).getListaVeiculos();
+                    for (Veiculo v:listaVeiculos1)
+                        seg.getListaClientes().get(indice2).getListaVeiculos().add(v); //Adicionando os veiculos em cliente 2
+                    
+                    List<Veiculo> listaNova = new ArrayList<Veiculo>();
+                    seg.getListaClientes().get(indice1).setListaVeiculos(listaNova); //Excluindo a lista do cliente 1
+
+                    seg.getListaClientes().get(indice1).setValorSeguro(seg.calcularPrecoSeguroCliente(seg.getListaClientes().get(indice1))); // Calculando o novo valor do seguro do cliente 1
+                    seg.getListaClientes().get(indice2).setValorSeguro(seg.calcularPrecoSeguroCliente(seg.getListaClientes().get(indice2))); // Calculando o novo valor do seguro do cliente 2
+                    System.out.println("Transferencia de seguro concluida");
+                } else {
+                    System.out.println("Os dois ou algum dos clientes não existe!");
+                }
                 break;
 
             case CALCULAR_RECEITA_SEGURADORA:
-
+                seg.calcularReceita();
                 break;
 
             case SAIR:

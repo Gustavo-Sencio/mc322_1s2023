@@ -1,8 +1,8 @@
 import java.util.*;
-import menus.*;
 
 public class AppMain{
     public static void main(String [] args){
+        double x = calcSeguro.VALOR_BASE.valor();
         //Cadastrando um cliente PF
         Calendar data_nascimento = Calendar.getInstance();
         data_nascimento.set(1980, 2, 24);
@@ -45,7 +45,31 @@ public class AppMain{
 
         System.out.println("-------------------------------------");
         
-        Listar list;
+        //Chamando alguns métodos da seguradora
+        AppMain.listandoClientes(seg, "PF");
+        AppMain.listandoClientes(seg, "PJ");
+        boolean lixo = seg.visualizarSinistro("Rodolfo");
+        AppMain.listandoSinistros(seg, Rodolfo);
+        AppMain.atualizar_valores(seg);
+        seg.calcularReceita();
+
+        //Chamando o menu
+        AppMain.menu(seg);
+    }
+
+    public static void atualizar_valores(Seguradora seg){
+        for (int i = 0; i < seg.getListaClientes().size(); i++){
+            seg.getListaClientes().get(i).setValorSeguro(seg.calcularPrecoSeguroCliente(seg.getListaClientes().get(i)));
+        }
+    }
+
+    public static void listandoSinistros(Seguradora seg, Cliente cliente){
+        List<Sinistro> lista = seg.listarSinistros(cliente);
+
+        for (Sinistro s:lista){
+            s.toString();
+            System.out.println("******************************");
+        }
     }
 
     public static void gerandoSinistro(Seguradora seg, Cliente cliente, Veiculo veiculo){
@@ -55,6 +79,13 @@ public class AppMain{
             System.out.println("O sinistro foi cadastrado com sucesso!");
         }else{
             System.out.println("O sinistro já existe!");
+        }
+    }
+
+    public static void listandoClientes(Seguradora seg, String tipo_cliente){
+        List<Cliente> lista = seg.listarClientes(tipo_cliente);
+        for(Cliente c:lista){
+            System.out.println(" - " + c.getNome());
         }
     }
 

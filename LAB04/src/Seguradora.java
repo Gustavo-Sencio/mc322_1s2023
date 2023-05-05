@@ -87,9 +87,8 @@ public class Seguradora {
         }
 
         if (out)
-            listaClientes.add(cliente);
             cliente.setValorSeguro(calcularPrecoSeguroCliente(cliente));
-        
+            listaClientes.add(cliente);
         return out;
     }
 
@@ -186,9 +185,9 @@ public class Seguradora {
     
     public void calcularReceita(){
         double soma = 0.0;
-        for (Cliente c:this.listaClientes){
+        for (Cliente c:this.listaClientes)
             soma += c.getValorSeguro();
-        }
+        
 
         System.out.println("A receita da seguradora "+this.nome+" é: "+soma);
     }
