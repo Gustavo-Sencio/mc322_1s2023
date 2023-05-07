@@ -82,6 +82,7 @@ public class Sinistro{
         String out = "";
         out += "Data: "+getData()+
         "\nEndereco: "+getEndereco()+
+        "\nID: "+getId()+
         "\nSeguradora: "+seguradora.toString()+
         "\nVeiculo: "+veiculo.toString()+
         "\nCliente: "+cliente.toString();

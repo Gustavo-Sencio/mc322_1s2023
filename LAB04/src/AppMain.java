@@ -48,10 +48,14 @@ public class AppMain{
         //Chamando alguns métodos da seguradora
         AppMain.listandoClientes(seg, "PF");
         AppMain.listandoClientes(seg, "PJ");
+        System.out.println("-------------------------------------");
         boolean lixo = seg.visualizarSinistro("Rodolfo");
+        System.out.println("-------------------------------------");
         AppMain.listandoSinistros(seg, Rodolfo);
+        System.out.println("-------------------------------------");
         AppMain.atualizar_valores(seg);
         seg.calcularReceita();
+        System.out.println("-------------------------------------");
 
         //Chamando o menu
         AppMain.menu(seg);

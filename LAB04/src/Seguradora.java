@@ -173,13 +173,11 @@ public class Seguradora {
     }
 
     public double calcularPrecoSeguroCliente(Cliente cliente){
-        double out;
+        double out = 0.0;
         if (cliente instanceof ClientePF)
             out = ((ClientePF)cliente).calculaScore() * (1 + listarSinistros(cliente).size());
         else if (cliente instanceof ClientePJ)
             out = ((ClientePJ)cliente).calculaScore() * (1 + listarSinistros(cliente).size());
-        else
-            out = cliente.calculaScore() * (1 + listarSinistros(cliente).size());
         return out;
     }
     
