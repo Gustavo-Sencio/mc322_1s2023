@@ -56,6 +56,33 @@ public class ClientePF extends Cliente{
     }
 
     //Outros métodos
+    public boolean cadastrarVeiculo(Veiculo veiculo){
+        boolean out = true;
+
+        for (Veiculo v:getListaVeiculos()){
+            if (v.equals(veiculo)){
+                out = false;
+                break;
+            }
+        }
+        if (out)
+            this.listaVeiculos.add(veiculo);
+        return out;
+    }
+
+    public boolean removerVeiculo(String Placa){
+        boolean out = false;
+
+        for (int i = 0; i < getListaVeiculos().size(); i++){
+            if(getListaVeiculos().get(i).getPlaca().equals(Placa)){
+                out = true;
+                this.listaVeiculos.remove(i);
+                break;
+            }
+        }
+        return out;
+    }
+
     @Override
     public String toString() {
         return "ClientePF [educacao=" + educacao + ", genero=" + genero + ", CPF=" + CPF + ", dataNascimento="

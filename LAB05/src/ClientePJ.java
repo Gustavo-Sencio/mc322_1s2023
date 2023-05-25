@@ -36,6 +36,24 @@ public class ClientePJ extends Cliente{
     }
 
     //Outros métodos
+    public boolean cadastrarFrota(Frota frota){
+        boolean out = true;
+
+        for (Frota f:getListaFrota()){
+            if (f.equals(frota)){
+                out = false;
+                break;
+            }
+        }
+        if (out)
+            this.listaFrota.add(frota);
+        return out;
+    }
+
+    public boolean atualizarFrota(???){
+        
+    }
+
     @Override
     public String toString() {
         return "ClientePJ [CNPJ=" + CNPJ + ", dataFundacao=" + dataFundacao + ", listaFrota=" + listaFrota + "]";

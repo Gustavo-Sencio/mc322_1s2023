@@ -9,15 +9,14 @@ public class Seguradora {
     private List<Seguro> listaSeguros;
     private List<Cliente> listaClientes;
     
-    public Seguradora(String CNPJ, String nome, String telefone, String email, String endereco,
-            List<Seguro> listaSeguros, List<Cliente> listaClientes) {
+    public Seguradora(String CNPJ, String nome, String telefone, String email, String endereco) {
         this.CNPJ = CNPJ;
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
         this.endereco = endereco;
-        this.listaSeguros = listaSeguros;
-        this.listaClientes = listaClientes;
+        this.listaSeguros = new ArrayList<Seguro>();
+        this.listaClientes = new ArrayList<Cliente>();
     }
 
     //Getters e setters
@@ -74,6 +73,59 @@ public class Seguradora {
     }
 
     //Outros métodos
+
+    /*Separa os clientes por tipo de acordo com a entrada e retorna
+    uma lista de clientes do tipo correspondente*/
+    public List<Cliente> listarClientes(String tipoCliente){
+        String pj = new String("PJ");
+        List<Cliente> outlist = new ArrayList<Cliente>();
+
+        if (tipoCliente.equals(pj)){
+            for (Cliente c:getListaClientes()){
+                if (c instanceof ClientePJ) //Se c é um cliente PJ
+                    outlist.add(c); //Adiciona na lista de saída
+            }
+        } else {
+            for (Cliente c:getListaClientes()){
+                if (c instanceof ClientePF) //Se c é um cliente PF
+                    outlist.add(c); //Adiciona na lista de saída
+            }
+        }
+        return outlist;
+    }
+
+    public boolean cadastrarCliente(Cliente cliente){
+        boolean out = true;
+
+        for (Cliente c:listaClientes){
+            if(c.equals(cliente)){
+                out = false;
+                break;
+            }
+        }
+
+        if (out)
+            listaClientes.add(cliente);
+        return out;
+    }
+
+    public boolean removerCliente(String cliente){
+        boolean out = false;
+
+        for (int i = 0; i<this.listaClientes.size(); i++){
+            if(this.listaClientes.get(i).getNome().equals(cliente)){ //Se o cliente está na lista
+                out = true;
+                this.listaClientes.remove(i); //Remova ele
+                break;
+            }
+        }
+        return out;
+    }
+
+    public List<Seguro> getSegurosporCliente(){
+        
+    }
+
     @Override
     public String toString() {
         return "Seguradora [CNPJ=" + CNPJ + ", nome=" + nome + ", telefone=" + telefone + ", email=" + email

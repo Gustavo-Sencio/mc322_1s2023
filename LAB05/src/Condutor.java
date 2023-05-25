@@ -75,6 +75,10 @@ public class Condutor {
     }
 
     //Outros métodos
+    public String adicionarSinistro(Sinistro sinistro){
+        this.listaSinistros.add(sinistro);
+    }
+
     @Override
     public String toString() {
         return "Condutor [CPF=" + CPF + ", nome=" + nome + ", telefone=" + telefone + ", endereco=" + endereco
