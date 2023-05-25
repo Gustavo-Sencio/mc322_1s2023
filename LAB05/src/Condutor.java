@@ -75,7 +75,7 @@ public class Condutor {
     }
 
     //Outros métodos
-    public String adicionarSinistro(Sinistro sinistro){
+    public void adicionarSinistro(Sinistro sinistro){
         this.listaSinistros.add(sinistro);
     }
 

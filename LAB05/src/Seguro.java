@@ -1,20 +1,21 @@
+import java.util.*;
+
 public abstract class Seguro {
     protected final int id;
     protected static int id_atual = 0;
     protected Calendar dataInicio;
     protected Calendar dataFim;
     protected Seguradora seguradora;
-    protected int valorMensal;
+    protected double valorMensal;
     protected List<Sinistro> listaSinistros;
     protected List<Condutor> listaCondutores;
 
-    public Seguro(Calendar dataInicio, Calendar dataFim, Seguradora seguradora, int valorMensal){
+    public Seguro(Calendar dataInicio, Calendar dataFim, Seguradora seguradora){
         this.id = id_atual;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.seguradora = seguradora;
-        this.valorMensal = valorMensal;
-        this.listaSeguros = new ArrayList<Sinistro>();
+        this.listaSinistros = new ArrayList<Sinistro>();
         this.listaCondutores = new ArrayList<Condutor>();
 
         //Somando o id para nunca existirem dois id's iguais
@@ -50,11 +51,11 @@ public abstract class Seguro {
         this.seguradora = seguradora;
     }
 
-    public int getValorMensal(){
+    public double getValorMensal(){
         return valorMensal;
     }
 
-    public void setValorMensal(int valorMensal){
+    public void setValorMensal(double valorMensal){
         this.valorMensal = valorMensal;
     }
 
@@ -66,24 +67,16 @@ public abstract class Seguro {
         return this.listaCondutores;
     }
 
-    public void setListaCondutores(List<Condutor>){
+    public void setListaCondutores(List<Condutor> listaCondutores){
         this.listaCondutores = listaCondutores;
     }
 
     //outros métodos
-    public abstract void desautorizarCondutor(Condutor condutor){
+    public abstract boolean desautorizarCondutor(String condutor);
 
-    }
+    public abstract boolean autorizarCondutor(Condutor condutor);
 
-    public abstract void autorizarCondutor(Condutor condutor){
+    public abstract boolean gerarSinistro(Calendar data, String endereco, Condutor condutor);
 
-    }
-
-    public abstract void gerarSinistro(){
-
-    }
-
-    public abstract double calcularValor(){
-        
-    }
+    public abstract double calcularValor();
 }

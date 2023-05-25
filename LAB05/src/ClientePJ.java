@@ -4,6 +4,7 @@ public class ClientePJ extends Cliente{
     private final String CNPJ;
     private Calendar dataFundacao;
     private List<Frota> listaFrota;
+    private int qtdFuncionarios;
 
     //Construtor
     public ClientePJ(String nome, String endereco, String telefone, String email, String CNPJ, Calendar dataFundacao,
@@ -25,6 +26,14 @@ public class ClientePJ extends Cliente{
 
     public void setDataFundacao(Calendar dataFundacao) {
         this.dataFundacao = dataFundacao;
+    }
+
+    public int getQtdFuncionarios() {
+        return qtdFuncionarios;
+    }
+
+    public void setQtdFuncionarios(int qtdFuncionarios) {
+        this.qtdFuncionarios = qtdFuncionarios;
     }
 
     public List<Frota> getListaFrota() {
@@ -52,6 +61,21 @@ public class ClientePJ extends Cliente{
 
     public boolean atualizarFrota(???){
         
+    }
+
+    public boolean getVeiculosPorFrota(String code){
+        boolean out = false;
+        
+        for (Frota c : getListaFrota()){
+            if (c.getCode().equals(code)){
+                out = true;
+                System.out.println(c.getListaVeiculos());
+                break;
+            }
+        }
+        if(!out){
+            System.out.println("O codigo não existe!");
+        }
     }
 
     @Override

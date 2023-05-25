@@ -1,3 +1,6 @@
+import java.util.*;
+
+
 public class Sinistro {
     private final int id;
     private static int id_atual = 0;
