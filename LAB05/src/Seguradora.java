@@ -111,19 +111,114 @@ public class Seguradora {
 
     public boolean removerCliente(String cliente){
         boolean out = false;
+        Cliente cl;
+        Seguro seg;
 
         for (int i = 0; i<this.listaClientes.size(); i++){
             if(this.listaClientes.get(i).getNome().equals(cliente)){ //Se o cliente está na lista
                 out = true;
+                cl = getListaClientes().get(i);
                 this.listaClientes.remove(i); //Remova ele
                 break;
             }
         }
+        for (Seguro s:getListaSeguros()){
+            if(s.getCliente().equals(cl)){
+                seg = s;
+                break
+            }
+        }
+
+        boolean ver = cancelarSeguro(seg.getId());
+
         return out;
     }
 
-    public List<Seguro> getSegurosporCliente(){
+    public boolean cancelarSeguro(int id){
+        boolean out = false;
+
+        for (int i = 0; i<getListaSeguros().size(); i++){
+            if(getListaSeguros().get(i).getId() == id){
+                out = true;
+                this.listaSeguros.remove(i);
+                break;
+            }
+        }
+
+        return out;
+    }
+
+    public boolean gerarSeguro(ClientePF cliente, Veiculo veiculo){
+        boolean out = false;
+        for (Cliente c:getListaClientes()){ //Verificando se o cliente está na seguradora
+            if (c.equals(cliente)){
+                out = true;
+                break;
+            }
+        }
+
+        if (out){
+            Calendar dataInicio = Calendar.getInstance();
+            Calendar dataFim = Calendar.getInstance();
+            dataFim.set(dataFim.get(Calendar.YEAR) + 10, dataFim.get(Calendar.MONTH), dataFim.get(Calendar.DAY));
+            Seguro novoSeguro = new Seguro(dataInicio, dataFim, this, veiculo, cliente);
+            this.listaSeguros.add(novoSeguro);
+        }
+
+        return out;
+    }
+
+    public boolean gerarSeguro(ClientePJ cliente, Frota frota){
+        boolean out = false;
+        for (Cliente c:getListaClientes()){ //Verificando se o cliente está na seguradora
+            if (c.equals(cliente)){
+                out = true;
+                break;
+            }
+        }
+
+        if (out){
+            Calendar dataInicio = Calendar.getInstance();
+            Calendar dataFim = Calendar.getInstance();
+            dataFim.set(dataFim.get(Calendar.YEAR) + 10, dataFim.get(Calendar.MONTH), dataFim.get(Calendar.DAY));
+            Seguro novoSeguro = new Seguro(dataInicio, dataFim, this, frota, cliente);
+            this.listaSeguros.add(novoSeguro);
+        }
+
+        return out;
+    }
+
+    public List<Seguro> getSegurosPorCliente(Cliente cliente){
+        List<Seguro> segurosCliente = new ArrayList<Cliente>();
+
+        for (Seguro s:getListaSeguros()){
+            if (s.getCliente().equals(cliente))
+                segurosCliente.add(s);
+        }
+
+        return segurosCliente;
+    }
+
+    public List<Sinistro> getSinistrosPorCliente(Cliente cliente){
+        List<Sinistro> sinistrosCliente = new ArrayList<Cliente>();
+        List<Seguro> segurosCliente = getSegurosPorCliente(cliente);
+
+        for (Seguro s:segurosCliente){
+            for (Sinistro sinistro:s.getListaSinistros()){
+                sinistrosCliente.add(sinistro);
+            }
+        }
+
+        return sinistrosCliente;
+    }
+
+    public double calcularReceita(){
+        double receita = 0;
+
+        for (Seguro s:getListaSeguros())
+            receita += s.getValorMensal();
         
+        return receita;
     }
 
     @Override

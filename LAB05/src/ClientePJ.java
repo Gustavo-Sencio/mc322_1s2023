@@ -54,6 +54,10 @@ public class ClientePJ extends Cliente{
                 break;
             }
         }
+
+        if (frota.getListaVeiculos().size() == 0) //se a frota não tem veiculos ela não pode existir
+            out = false;
+
         if (out)
             this.listaFrota.add(frota);
         return out;
