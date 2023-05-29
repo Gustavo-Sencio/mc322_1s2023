@@ -22,8 +22,8 @@ public class SeguroPJ extends Seguro{
     public ClientePJ getCliente() {
         return cliente;
     }
-    public void setCliente(ClientePJ cliente) {
-        this.cliente = cliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = (ClientePJ)cliente;
     }
 
     //Outros métodos
@@ -46,7 +46,7 @@ public class SeguroPJ extends Seguro{
 
     public boolean desautorizarCondutor(String condutor){
         boolean out = false;
-        Condutor cond;
+        Condutor cond = getListaCondutores().get(0);
 
         for (int i = 0; i<getListaCondutores().size(); i++){
             if(getListaCondutores().get(i).getNome().equals(condutor)){ //Se o condutor está na lista
@@ -58,9 +58,11 @@ public class SeguroPJ extends Seguro{
         }
 
         //agora devo remover os sinistros do condutor
-        for (int i = getListaSinistros().size() - 1; i >= 0; i--){
-            if (getListaSinistros().get(i).getCondutor().equals(cond))
-                this.listandoSinistros().remove(i);
+        if (out){
+            for (int i = getListaSinistros().size() - 1; i >= 0; i--){
+                if (getListaSinistros().get(i).getCondutor().equals(cond))
+                    this.listaSinistros.remove(i);
+            }
         }
 
         setValorMensal(calcularValor());

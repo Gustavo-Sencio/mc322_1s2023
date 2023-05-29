@@ -72,6 +72,10 @@ public abstract class Seguro {
     }
 
     //outros métodos
+    public abstract Cliente getCliente();
+
+    public abstract void setCliente(Cliente cliente);
+
     public abstract boolean desautorizarCondutor(String condutor);
 
     public abstract boolean autorizarCondutor(Condutor condutor);

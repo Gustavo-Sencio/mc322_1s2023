@@ -26,8 +26,8 @@ public class SeguroPF extends Seguro{
         return cliente;
     }
 
-    public void setCliente(ClientePF cliente) {
-        this.cliente = cliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = (ClientePF)cliente;
     }
 
     //Outros métodos
@@ -50,12 +50,22 @@ public class SeguroPF extends Seguro{
 
     public boolean desautorizarCondutor(String condutor){
         boolean out = false;
+        Condutor cond = getListaCondutores().get(0);
 
         for (int i = 0; i<getListaCondutores().size(); i++){
             if(getListaCondutores().get(i).getNome().equals(condutor)){ //Se o condutor está na lista
                 out = true;
+                cond = getListaCondutores().get(i);
                 this.listaCondutores.remove(i); //Remova ele
                 break;
+            }
+        }
+
+        //agora devo remover os sinistros do condutor
+        if (out){
+            for (int i = getListaSinistros().size() - 1; i >= 0; i--){
+                if (getListaSinistros().get(i).getCondutor().equals(cond))
+                    this.listaSinistros.remove(i);
             }
         }
 

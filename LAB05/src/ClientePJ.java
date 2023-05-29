@@ -63,8 +63,43 @@ public class ClientePJ extends Cliente{
         return out;
     }
 
-    public boolean atualizarFrota(???){
+    public boolean atualizarFrota(char option, Veiculo veiculo, String code){
+        boolean out = false;
+
+        if ((option == 'A') || (option == 'a')){
+            for (int i = 0; i < getListaFrota().size(); i++){
+                if (getListaFrota().get(i).getCode().equals(code)){
+                    out = getListaFrota().get(i).addVeiculo(veiculo);
+                }
+            }
+        }
+
+        if ((option == 'R') || (option == 'r')){
+            for (int i = 0; i < getListaFrota().size(); i++){
+                if (getListaFrota().get(i).getCode().equals(code)){
+                    for (Veiculo v:getListaFrota().get(i).getListaVeiculos()){
+                        if (v.equals(veiculo)){
+                            out = getListaFrota().get(i).removerVeiculo(veiculo.getPlaca());
+                        }
+                    }
+                }
+            }
+        }
         
+        return out;
+    }
+
+    public boolean atualizarFrota(String code){
+        boolean out = false;
+
+        for (int i = 0; i < getListaFrota().size(); i++){
+            if (getListaFrota().get(i).getCode().equals(code)){
+                out = true;
+                this.listaFrota.remove(i);
+            }
+        }
+
+        return out;
     }
 
     public boolean getVeiculosPorFrota(String code){
@@ -80,10 +115,11 @@ public class ClientePJ extends Cliente{
         if(!out){
             System.out.println("O codigo não existe!");
         }
+        return out;
     }
 
     @Override
     public String toString() {
-        return "ClientePJ [CNPJ=" + CNPJ + ", dataFundacao=" + dataFundacao + ", listaFrota=" + listaFrota + "]";
+        return "ClientePJ [CNPJ=" + CNPJ + ", listaFrota=" + listaFrota + "]";
     } 
 }

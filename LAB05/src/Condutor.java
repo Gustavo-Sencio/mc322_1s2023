@@ -10,15 +10,14 @@ public class Condutor {
     private List<Sinistro> listaSinistros;
 
     //Construtor
-    public Condutor(String cPF, String nome, String telefone, String endereco, String email, Calendar dataNascimento,
-            List<Sinistro> listaSinistros) {
+    public Condutor(String cPF, String nome, String telefone, String endereco, String email, Calendar dataNascimento) {
         CPF = cPF;
         this.nome = nome;
         this.telefone = telefone;
         this.endereco = endereco;
         this.email = email;
         this.dataNascimento = dataNascimento;
-        this.listaSinistros = listaSinistros;
+        this.listaSinistros = new ArrayList<Sinistro>();
     }
 
     //Getters e Setters

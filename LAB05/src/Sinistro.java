@@ -56,4 +56,10 @@ public class Sinistro {
     public void setSeguro(Seguro seguro){
         this.seguro = seguro;
     }
+
+    @Override
+    public String toString() {
+        return "Sinistro [id=" + id + ", data=" + data + ", endereco=" + endereco + ", condutor=" + condutor
+                + ", seguro=" + seguro + "]";
+    }
 }

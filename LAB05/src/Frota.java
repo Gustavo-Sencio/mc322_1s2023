@@ -4,7 +4,12 @@ public class Frota {
     String code;
     private List<Veiculo> listaVeiculos;
     
-    //Construtor
+    //Construtores
+    public Frota(String code){
+        this.code = code;
+        this.listaVeiculos = new ArrayList<Veiculo>();
+    }
+
     public Frota(String code, List<Veiculo> listaVeiculos) {
         this.code = code;
         this.listaVeiculos = listaVeiculos;
@@ -45,11 +50,13 @@ public class Frota {
     public boolean removerVeiculo(String Placa){
         boolean out = false;
 
-        for (int i = 0; i < getListaVeiculos().size(); i++){
-            if(getListaVeiculos().get(i).getPlaca().equals(Placa)){
-                out = true;
-                this.listaVeiculos.remove(i);
-                break;
+        if (getListaVeiculos().size() > 1){
+            for (int i = 0; i < getListaVeiculos().size(); i++){
+                if(getListaVeiculos().get(i).getPlaca().equals(Placa)){
+                    out = true;
+                    this.listaVeiculos.remove(i);
+                    break;
+                }
             }
         }
         return out;

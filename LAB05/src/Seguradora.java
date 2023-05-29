@@ -111,7 +111,7 @@ public class Seguradora {
 
     public boolean removerCliente(String cliente){
         boolean out = false;
-        Cliente cl;
+        Cliente cl = getListaClientes().get(0);
         Seguro seg;
 
         for (int i = 0; i<this.listaClientes.size(); i++){
@@ -122,14 +122,15 @@ public class Seguradora {
                 break;
             }
         }
-        for (Seguro s:getListaSeguros()){
-            if(s.getCliente().equals(cl)){
-                seg = s;
-                break
+
+        if (out){
+            for (Seguro s:getListaSeguros()){
+                if(s.getCliente().equals(cl)){
+                    seg = s;
+                    boolean ver = cancelarSeguro(seg.getId());
+                }
             }
         }
-
-        boolean ver = cancelarSeguro(seg.getId());
 
         return out;
     }
@@ -160,8 +161,8 @@ public class Seguradora {
         if (out){
             Calendar dataInicio = Calendar.getInstance();
             Calendar dataFim = Calendar.getInstance();
-            dataFim.set(dataFim.get(Calendar.YEAR) + 10, dataFim.get(Calendar.MONTH), dataFim.get(Calendar.DAY));
-            Seguro novoSeguro = new Seguro(dataInicio, dataFim, this, veiculo, cliente);
+            dataFim.set(dataFim.get(Calendar.YEAR) + 10, dataFim.get(Calendar.MONTH), dataFim.get(Calendar.DAY_OF_MONTH));
+            Seguro novoSeguro = new SeguroPF(dataInicio, dataFim, this, veiculo, cliente);
             this.listaSeguros.add(novoSeguro);
         }
 
@@ -180,8 +181,8 @@ public class Seguradora {
         if (out){
             Calendar dataInicio = Calendar.getInstance();
             Calendar dataFim = Calendar.getInstance();
-            dataFim.set(dataFim.get(Calendar.YEAR) + 10, dataFim.get(Calendar.MONTH), dataFim.get(Calendar.DAY));
-            Seguro novoSeguro = new Seguro(dataInicio, dataFim, this, frota, cliente);
+            dataFim.set(dataFim.get(Calendar.YEAR) + 10, dataFim.get(Calendar.MONTH), dataFim.get(Calendar.DAY_OF_MONTH));
+            Seguro novoSeguro = new SeguroPJ(dataInicio, dataFim, this, frota, cliente);
             this.listaSeguros.add(novoSeguro);
         }
 
@@ -189,7 +190,7 @@ public class Seguradora {
     }
 
     public List<Seguro> getSegurosPorCliente(Cliente cliente){
-        List<Seguro> segurosCliente = new ArrayList<Cliente>();
+        List<Seguro> segurosCliente = new ArrayList<Seguro>();
 
         for (Seguro s:getListaSeguros()){
             if (s.getCliente().equals(cliente))
@@ -200,7 +201,7 @@ public class Seguradora {
     }
 
     public List<Sinistro> getSinistrosPorCliente(Cliente cliente){
-        List<Sinistro> sinistrosCliente = new ArrayList<Cliente>();
+        List<Sinistro> sinistrosCliente = new ArrayList<Sinistro>();
         List<Seguro> segurosCliente = getSegurosPorCliente(cliente);
 
         for (Seguro s:segurosCliente){
@@ -224,7 +225,7 @@ public class Seguradora {
     @Override
     public String toString() {
         return "Seguradora [CNPJ=" + CNPJ + ", nome=" + nome + ", telefone=" + telefone + ", email=" + email
-                + ", endereco=" + endereco + ", listaSeguros=" + listaSeguros + ", listaClientes=" + listaClientes
+                + ", endereco=" + endereco + ", \nlistaSeguros=" + listaSeguros + ", \nlistaClientes=" + listaClientes
                 + "]";
     }    
 }
