@@ -7,7 +7,12 @@ public class ClientePF extends Cliente{
     private Calendar dataNascimento;
     private List<Veiculo> listaVeiculos;
 
-    //Construtor
+    //Construtores
+    public ClientePF(){
+        super();
+        this.CPF = "XXXXXXXX";
+    }
+
     public ClientePF(String nome, String endereco, String telefone, String email, String educacao, String genero,
             String CPF, Calendar dataNascimento, List<Veiculo> listaVeiculos) {
         super(nome, endereco, telefone, email);

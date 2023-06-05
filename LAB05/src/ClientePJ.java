@@ -8,11 +8,12 @@ public class ClientePJ extends Cliente{
 
     //Construtor
     public ClientePJ(String nome, String endereco, String telefone, String email, String CNPJ, Calendar dataFundacao,
-            List<Frota> listaFrota) {
+            List<Frota> listaFrota, int qtdFuncionarios) {
         super(nome, endereco, telefone, email);
         this.CNPJ = CNPJ;
         this.dataFundacao = dataFundacao;
         this.listaFrota = listaFrota;
+        this.qtdFuncionarios = qtdFuncionarios;
     }
 
     //Getters e Setters

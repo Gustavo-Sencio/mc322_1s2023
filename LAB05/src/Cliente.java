@@ -4,7 +4,11 @@ public abstract class Cliente {
     protected String telefone;
     protected String email;
 
-    //Construtor
+    //Construtores
+    public Cliente(){
+        
+    }
+
     public Cliente(String nome, String endereco, String telefone, String email) {
         this.nome = nome;
         this.endereco = endereco;

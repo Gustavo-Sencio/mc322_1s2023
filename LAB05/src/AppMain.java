@@ -25,7 +25,7 @@ public class AppMain {
         Calendar dataFundacao = Calendar.getInstance();
         dataFundacao.set(2014, 12, 4);
         ClientePJ clientePJ = new ClientePJ("Suprema", "Rua Senador Nilo Coelho",
-         "(11) 3587-8065", "Suprema@gmail.com", "87.647.025/0001-60", dataFundacao, listaFrota);
+         "(11) 3587-8065", "Suprema@gmail.com", "87.647.025/0001-60", dataFundacao, listaFrota, 30);
 
         //Criando um cliente PF
         Veiculo v4 = new Veiculo("NDM-3626", "Asia Motors", "Towner SDX / DLX/ Std.", 1993);
@@ -45,8 +45,6 @@ public class AppMain {
         //Cadastrando a Aline e a empresa Suprema na seguradora
         seg.cadastrarCliente(clientePF);
         seg.cadastrarCliente(clientePJ);
-        System.out.println(seg.toString());
-        System.out.println("-----------------------------------------");
 
         //Criando os seguros respectivos
         seg.gerarSeguro(clientePF, v4);
@@ -55,5 +53,47 @@ public class AppMain {
         System.out.println(seg.toString());
         System.out.println("-----------------------------------------");
 
+        //Autorizando alguns condutores
+        seg.getListaSeguros().get(0).autorizarCondutor(c1);
+        seg.getListaSeguros().get(1).autorizarCondutor(c2);
+        seg.getListaSeguros().get(2).autorizarCondutor(c3);
+
+        //Gerando alguns sinistros
+        Calendar dataAtual = Calendar.getInstance();
+        seg.getListaSeguros().get(0).gerarSinistro(dataAtual, "Avenida Rio Grande do Norte", c1);
+        seg.getListaSeguros().get(1).gerarSinistro(dataAtual, "Setor Central", c2);
+        seg.getListaSeguros().get(2).gerarSinistro(dataAtual, "Travessa Monsenhor Tabosa", c3);
+
+        //Chamando o toString de cada classe
+        System.out.println("Seguradora:");
+        System.out.println(seg.toString());
+        System.out.println("-----------------------------------------");
+        System.out.println("ClientePF:");
+        System.out.println(clientePF.toString());
+        System.out.println("-----------------------------------------");
+        System.out.println("ClientePJ:");
+        System.out.println(clientePJ.toString());
+        System.out.println("-----------------------------------------");
+        System.out.println("Frota:");
+        System.out.println(f1.toString());
+        System.out.println("-----------------------------------------");
+        System.out.println("Veiculo:");
+        System.out.println(f1.getListaVeiculos().get(0).toString());
+        System.out.println("-----------------------------------------");
+        System.out.println("Condutor:");
+        System.out.println(c1.toString());
+        System.out.println("-----------------------------------------");
+        System.out.println("Sinistro:");
+        System.out.println(c1.getListaSinistros().get(0).toString());
+        System.out.println("-----------------------------------------");
+        System.out.println("SeguroPF:");
+        System.out.println(seg.getListaSeguros().get(0).toString());
+        System.out.println("-----------------------------------------");
+        System.out.println("SeguroPJ:");
+        System.out.println(seg.getListaSeguros().get(1).toString());
+        System.out.println("-----------------------------------------");
+
+        //Chamando o menu
+        Menu.principal(seg);
     }
 }
