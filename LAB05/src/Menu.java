@@ -19,8 +19,6 @@ public class Menu {
             "22 - Listar seguros da seguradora\n"+
             "23 - Listar sinistros do cliente\n"+
             "24 - Listar seguros do cliente\n"+
-            "25 - Listar veiculos do cliente-PF\n"+
-            "26 - Listar frotas do cliente-PJ\n"+
             "31 - Excluir cliente\n"+
             "32 - Excluir seguro\n"+
             "33 - Excluir veiculo da frota\n"+
@@ -159,14 +157,6 @@ public class Menu {
                 break;
             
             case 24:
-                
-                break;
-
-            case 25:
-                
-                break;
-
-            case 26:
                 
                 break;
 
