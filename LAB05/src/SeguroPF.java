@@ -4,6 +4,12 @@ public class SeguroPF extends Seguro{
     private Veiculo veiculo;
     private ClientePF cliente;
     
+
+    //Construtores
+    public SeguroPF(){
+        super();
+    }
+
     public SeguroPF(Calendar dataInicio, Calendar dataFim, Seguradora seguradora, Veiculo veiculo,
             ClientePF cliente) {
         super(dataInicio, dataFim, seguradora);

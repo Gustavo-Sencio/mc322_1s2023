@@ -6,7 +6,13 @@ public class ClientePJ extends Cliente{
     private List<Frota> listaFrota;
     private int qtdFuncionarios;
 
-    //Construtor
+    //Construtores
+
+    public ClientePJ(){
+        super();
+        this.CNPJ = "XXXX";
+    }
+
     public ClientePJ(String nome, String endereco, String telefone, String email, String CNPJ, Calendar dataFundacao,
             List<Frota> listaFrota, int qtdFuncionarios) {
         super(nome, endereco, telefone, email);

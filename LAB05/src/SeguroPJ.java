@@ -4,6 +4,12 @@ public class SeguroPJ extends Seguro{
     Frota frota;
     ClientePJ cliente;
 
+
+    //Construtores
+    public SeguroPJ(){
+            super();
+        }
+
     public SeguroPJ(Calendar dataInicio, Calendar dataFim, Seguradora seguradora, Frota frota, ClientePJ cliente) {
         super(dataInicio, dataFim, seguradora);
         this.frota = frota;

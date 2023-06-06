@@ -10,6 +10,11 @@ public abstract class Seguro {
     protected List<Sinistro> listaSinistros;
     protected List<Condutor> listaCondutores;
 
+    public Seguro(){
+        this.id = id_atual;
+        id_atual++;
+    }
+    
     public Seguro(Calendar dataInicio, Calendar dataFim, Seguradora seguradora){
         this.id = id_atual;
         this.dataInicio = dataInicio;
