@@ -50,7 +50,6 @@ public class AppMain {
         seg.gerarSeguro(clientePF, v4);
         seg.gerarSeguro(clientePJ, f1);
         seg.gerarSeguro(clientePJ, f2);
-        System.out.println(seg.toString());
         System.out.println("-----------------------------------------");
 
         //Autorizando alguns condutores

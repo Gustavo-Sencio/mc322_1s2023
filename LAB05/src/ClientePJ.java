@@ -127,6 +127,6 @@ public class ClientePJ extends Cliente{
 
     @Override
     public String toString() {
-        return "ClientePJ [CNPJ=" + CNPJ + ", listaFrota=" + listaFrota + "]";
+        return "ClientePJ [CNPJ=" + CNPJ + ", nome=" + nome + ", email=" + email + ", telefone=" +telefone + ", endereco=" +endereco+ ", listaFrota=" + listaFrota + "]";
     } 
 }

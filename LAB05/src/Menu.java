@@ -10,7 +10,7 @@ public class Menu {
             System.out.println("Selecione alguma das seguinte opcoes:\n"+
             "11 - Cadastrar Cliente\n"+
             "12 - Cadastrar Veiculo-PF\n"+
-            "13 - Cadastrar Veiculo-Frota"+
+            "13 - Cadastrar Veiculo-Frota\n"+
             "14 - Cadastrar Frota\n"+
             "15 - Autorizar Condutor\n"+
             "16 - Gerar Seguro\n"+
@@ -25,9 +25,9 @@ public class Menu {
             "34 - Excluir veiculo clientePF\n"+
             "4 - Calcular Receita Seguradora\n"+
             "0 - Encerrar menu");
-            
             input = entrada.nextInt();
             loop = Menu.processarEntrada(input, seg);
+            System.out.println("*************************************");
         }
     }
 

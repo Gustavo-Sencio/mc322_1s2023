@@ -127,6 +127,6 @@ public class SeguroPF extends Seguro{
 
     @Override
     public String toString() {
-        return "SeguroPF [veiculo=" + veiculo + ", cliente=" + cliente + "]";
+        return "SeguroPF [ID=" +id+ "veiculo=" + veiculo + ", cliente=" + cliente + ", listaSinistros=" +listaSinistros+ ", listaCondutores=" +listaCondutores+"]";
     }
 }
