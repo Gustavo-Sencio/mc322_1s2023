@@ -6,6 +6,13 @@ public class Seguradora {
     private String telefone;
     private String email;
     private String endereco;
+    ArquivoClientePF arquivoClientePF;
+    ArquivoClientePJ arquivoClientePJ;
+    ArquivoCondutor arquivoCondutor;
+    ArquivoFrota arquivoFrota;
+    ArquivoSeguro arquivoSeguro;
+    ArquivoSinistro arquivoSinistro;
+    ArquivoVeiculo arquivoVeiculo;
     private List<Seguro> listaSeguros;
     private List<Cliente> listaClientes;
     
